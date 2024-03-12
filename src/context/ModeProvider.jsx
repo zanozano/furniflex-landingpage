@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import { createTheme } from '@mui/material/styles';
 
 const ModeContext = createContext();
@@ -8,35 +8,33 @@ export const useMode = () => {
 };
 
 export const ModeProvider = ({ children }) => {
-    const [isLightMode, setIsLightMode] = useState(true);
 
-    const toggleMode = () => {
-        setIsLightMode((prevMode) => !prevMode);
-    };
-
-    useEffect(() => {
-        localStorage.setItem('isLightMode', isLightMode.toString());
-    }, [isLightMode]);
 
     const theme = createTheme({
         typography: {
-            fontFamily: 'Poppins, sans-serif',
             h1: {
-                fontSize: '4.4rem',
-                fontWeight: 500,
+                fontFamily: 'Tenor Sans',
+                fontSize: '4rem',
+                fontWeight: 400,
+                fontStyle: 'normal',
                 '@media (max-width:600px)': {
-                    fontSize: '2.8rem',
+                    fontSize: '1.8rem',
                 },
             },
             h2: {
-                fontSize: '2.2rem',
-                fontWeight: 300,
+                fontFamily: 'Tenor Sans',
+                fontSize: '4rem',
+                fontWeight: 400,
+                fontStyle: 'normal',
                 '@media (max-width:600px)': {
                     fontSize: '1.6rem',
                 },
             },
             h3: {
-                fontSize: '1.4rem',
+                color: (theme) => theme.palette.textSecondary.main,
+                fontFamily: "Red Hat Display",
+                fontSize: '2rem',
+                fontWeight: 'bold',
                 '@media (max-width:600px)': {
                     fontSize: '1.2rem',
                 },
@@ -61,33 +59,27 @@ export const ModeProvider = ({ children }) => {
 
         },
         palette: {
-            mode: isLightMode ? "light" : "dark",
             primary: {
-                main: isLightMode ? '#055CDF' : '#055CDF',
+                main: '#86D5CF',
             },
             secondary: {
-                main: '#032F70',
+                main: '#D2E4EE',
             },
-            tertiary: {
-                main: '#4EE4C1',
+            textPrimary: {
+                main: '#1F1F1F',
+            },
+            textSecondary: {
+                main: '#464646',
             },
             surface: {
-                main: isLightMode ? '#ffffff' : '#292929',
+                main: '#ffffff',
             },
-            photo: {
-                main: isLightMode ? '#FAF9F6' : '#222222',
-            },
-            invert: {
-                main: isLightMode ? '#222222' : '#EEEEEE',
-            },
-            gradient: {
-                main: isLightMode ? 'linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 100%)' : 'linear-gradient(to bottom, transparent 0%, rgba(18, 18, 18, 1) 100%)',
-            }
         },
         components: {
             MuiButton: {
                 styleOverrides: {
                     root: {
+                        backgroundColor: (theme) => theme.palette.primary.main,
                         textTransform: 'initial',
                     },
                 }
@@ -95,7 +87,7 @@ export const ModeProvider = ({ children }) => {
             MuiAppBar: {
                 styleOverrides: {
                     root: {
-                        backgroundColor: '#ffffff',
+                        backgroundColor: 'rgba(255,255,255,0.5)',
                         color: '#000000',
                     },
                 }
@@ -104,8 +96,6 @@ export const ModeProvider = ({ children }) => {
     });
 
     const contextValue = {
-        isLightMode,
-        toggleMode,
         theme,
     };
 

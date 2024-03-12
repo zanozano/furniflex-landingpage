@@ -4,18 +4,32 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+
+
+const pages = ['Home', 'Product', 'Contact'];
 
 export default function Navbar() {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" elevation='0'>
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <AppBar position="static" >
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography variant="h6">
                         Furniflex
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Box sx={{ display: { xs: 'none', md: 'flex', gap: '24px' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                sx={{ color: 'inherit' }}
+                            >
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
+                    <Box sx={{ display: 'flex', gap: '24px' }}>
+                        <Button variant="contained" disableElevation>Sign in</Button>
+                        <Button variant="contained" disableElevation>Sign in</Button>
+                    </Box>
                 </Toolbar>
             </AppBar>
         </Box>
